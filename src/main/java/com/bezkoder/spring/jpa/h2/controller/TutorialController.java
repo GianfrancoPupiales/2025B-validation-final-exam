@@ -26,10 +26,14 @@ import com.bezkoder.spring.jpa.h2.repository.TutorialRepository;
 @RequestMapping("/api")
 public class TutorialController {
 
-  @Autowired
+  final
   TutorialRepository tutorialRepository;
 
-  @GetMapping("/tutorials")
+    public TutorialController(TutorialRepository tutorialRepository) {
+        this.tutorialRepository = tutorialRepository;
+    }
+
+    @GetMapping("/tutorials")
   public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
     try {
       List<Tutorial> tutorials = new ArrayList<Tutorial>();
